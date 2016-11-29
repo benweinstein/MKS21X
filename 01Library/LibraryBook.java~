@@ -1,0 +1,17 @@
+public abstract class LibraryBook extends Book implements Comparable<LibraryBook>{
+    private String callNumber;
+
+    //Constructors:
+    /**Null constructor*/
+    public LibraryBook(){
+	super();
+	//not sure if supposed to do anything here...?
+    }
+    
+
+
+
+
+
+
+}
