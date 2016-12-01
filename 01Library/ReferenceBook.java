@@ -4,7 +4,8 @@ public class ReferenceBook extends LibraryBook{
     //Constructors:
     /**Null constructor*/
     public ReferenceBook(){
-	//actually not sure if necessary
+	super();
+	collection = "null";
     }
 
     /**Constructor with five parameters*/
@@ -45,6 +46,7 @@ public class ReferenceBook extends LibraryBook{
      *@return String; augmented toString() with the same format from LibraryBook class, now including collection*/
     public String toString(){
 	return super.toString() + ", " + getCollection();
+	//return getTitle() + getAuthor() + getISBN() + circulationStatus() + getCollection(); TROUBLE HERE
     }
 }
 	

@@ -6,7 +6,9 @@ public class Book{
     //Constructors:
     /**Null constructor*/
     public Book(){
-
+	title = "null";
+	author = "null";
+	ISBN = "null";
     }
 
     /**Constructor with title, author, and ISBN number. Don't be fooled; they're all strings*/

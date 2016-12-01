@@ -5,7 +5,7 @@ public abstract class LibraryBook extends Book implements Comparable<LibraryBook
     /**Null constructor*/
     public LibraryBook(){
 	super();
-	//not sure if supposed to do anything here...?
+	callNumber = "null";
     }
     
     /**Constructor with four parameters given*/
