@@ -1,22 +1,19 @@
 import java.util.*;
 
 public class SuperArrayIterator implements Iterator<String>{
-    private int start;
-    private int end;
+    private int counter; //for keeping track of where you are in the SuperArray
     private SuperArray sAry;
-    //^^ need something for the SuperArray ^^
-
+    
     /**Constructor!!!*/
-    public SuperArrayIterator(int start, int end, SuperArray sAry){
-	this.start = start;
-	this.end = end;
+    public SuperArrayIterator(SuperArray sAry){
 	this.sAry = sAry;
+	counter = 0;
     }
 
     public String next(){
 	if(hasNext()){
-	    start++;
-	    return sAry.get(start - 1);
+	    counter++;
+	    return sAry.get(counter - 1);
 	}
 	else{
 	    throw new NoSuchElementException();
@@ -24,16 +21,11 @@ public class SuperArrayIterator implements Iterator<String>{
     }
 
     public boolean hasNext(){
-	return start < end && start < sAry.size();
+	return counter < sAry.size();
     }
 
     public void remove(){
 	throw new UnsupportedOperationException();
     }
-
-
-
-
-
 }
     
