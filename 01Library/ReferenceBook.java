@@ -5,7 +5,7 @@ public class ReferenceBook extends LibraryBook{
     /**Null constructor*/
     public ReferenceBook(){
 	super();
-	collection = "null";
+	collection = null;
     }
 
     /**Constructor with five parameters*/

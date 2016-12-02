@@ -6,8 +6,8 @@ public class CirculatingBook extends LibraryBook{
     /**Null constructor*/
     public CirculatingBook(){
 	super();
-        currentHolder = "null";
-	dueDate = "null";
+        currentHolder = null;
+	dueDate = null;
     }
 
     /**Constructor with four parameters, currentHolder and dueDate left null*/
@@ -45,13 +45,13 @@ public class CirculatingBook extends LibraryBook{
 
     /**Handles processing when a book is returned (currentHolder and dueDate are set to null*/
     public void returned(){
-	setCurrentHolder("null");
-	setDueDate("null");
+	setCurrentHolder(null);
+	setDueDate(null);
     }
 
     /**Returns the currentHolder's name and dueDate, if the book has been checked out; or "book available on shelves" if the book is available*/
     public String circulationStatus(){
-	if(getCurrentHolder().equals("null") && getDueDate().equals("null")){
+	if(getCurrentHolder() == null && getDueDate() == null){
 	    return "book available on shelves";
 	}
 	return "checked out by: " + getCurrentHolder() + ", due: " + getDueDate();
