@@ -47,9 +47,9 @@ public class Barcode implements Comparable<Barcode>{
     //ex. "084518  |||:::|::|::|::|:|:|::::|||::|:|"      
     public String toString(){
 	String zipPlus = _zip + checkSum();
-	String ans = "|";
+	String ans = zipPlus + " |";
 	for(int i = 0; i < zipPlus.length(); i++){
-	    switch(_zip.charAt(i)){
+	    switch(zipPlus.charAt(i)){
 	    case '1': ans += ":::||";
 		break;
 	    case '2': ans += "::|:|";
