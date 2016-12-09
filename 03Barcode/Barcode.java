@@ -97,7 +97,8 @@ public class Barcode implements Comparable<Barcode>{
 	if(zip.length() != 5){
 	    throw new IllegalArgumentException("given zip has incorrect length");
 	}
-	String ans = '|';
+
+	String ans = "|";
 
 	//String[] helps in lower part's exception check
 	String[] stringNums = {"0","1","2","3","4","5","6","7","8","9"};
@@ -118,7 +119,7 @@ public class Barcode implements Comparable<Barcode>{
     //ex. "084518 |||:::|::|::|::|:|:|::::|||::|:|"
     public String toString(){
 	String ans = _zip + checkSum(_zip) + " ";
-        ans += toCode(_zip + checkSum(_zip));
+        ans += toCode(_zip);
 	return ans;
     }
 
