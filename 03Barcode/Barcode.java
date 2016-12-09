@@ -25,14 +25,6 @@ public class Barcode implements Comparable<Barcode>{
 	_zip = zip;
     }
     
-    /*
-    // postcondition: Creates a copy of a bar code.
-    public Barcode clone(){
-	Barcode clonedBarcode = new Barcode(_zip);
-	return clonedBarcode;
-    }
-    */
-
     // postcondition: computes and returns the check sum for _zip
     public static int checkSum(String _zip){
 	int total = 0;
