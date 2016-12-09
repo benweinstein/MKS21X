@@ -55,7 +55,7 @@ public class Barcode implements Comparable<Barcode>{
 	    throw new IllegalArgumentException("given barcode had incorrect length");
 	}
 	if(code.charAt(0) != '|' || code.charAt(31) != '|'){
-	    throw new IllegalArgumentException("given barcode did not have valid guard rails");
+	    throw new IllegalArgumentException("given barcode has invalid guard rails");
 	}
 	for(int i = 0; i < code.length(); i++){
 	    if(code.charAt(i) != ':' && code.charAt(i) != '|'){
@@ -92,10 +92,21 @@ public class Barcode implements Comparable<Barcode>{
     }
     
     //converts zip (plus checkdigit) into Barcode format
-    public static String toCode(String zipPlus){
-       	String ans = "|";
-	for(int i = 0; i < zipPlus.length(); i++){
-	    String oneNumString = zipPlus.substring(i, i + 1);
+    public static String toCode(String zip){
+       	//EXCEPTIONS:
+	if(zip.length() != 5){
+	    throw new IllegalArgumentException("given zip has incorrect length");
+	}
+	String ans = '|';
+
+	//String[] helps in lower part's exception check
+	String[] stringNums = {"0","1","2","3","4","5","6","7","8","9"};
+
+	for(int i = 0; i < 5; i++){
+	    String oneNumString = zip.substring(i, i + 1);
+	    if(aryIndexOf(oneNumString, stringNums) == -1){ 
+		throw new IllegalArgumentException("given zip has incorrect characters"); //exception check for non-number characters in given zip
+	    } 
 	    int oneNumInt = Integer.parseInt(oneNumString);
 	    ans += bars[oneNumInt];
 	}    	    	 
