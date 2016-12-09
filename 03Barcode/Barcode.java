@@ -114,7 +114,7 @@ public class Barcode implements Comparable<Barcode>{
     //postcondition: format zip + check digit + Barcode
     //ex. "084518 |||:::|::|::|::|:|:|::::|||::|:|"
     public String toString(){
-	String ans = _zip + checkSum(_zip) + "  ";
+	String ans = _zip + checkSum(_zip) + " ";
         ans += toCode(_zip + checkSum(_zip));
 	return ans;
     }
