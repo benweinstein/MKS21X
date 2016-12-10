@@ -26,7 +26,7 @@ public class Barcode implements Comparable<Barcode>{
     }
     
     // postcondition: computes and returns the check sum for _zip
-    public static int checkSum(String _zip){
+    private static int checkSum(String _zip){
 	int total = 0;
 	int zipNum = Integer.parseInt(_zip);
        
@@ -91,7 +91,7 @@ public class Barcode implements Comparable<Barcode>{
 	return ans;	
     }
     
-    //converts zip (plus checkdigit) into Barcode format
+    //converts zip into Barcode format
     public static String toCode(String zip){
        	//EXCEPTIONS:
 	if(zip.length() != 5){
@@ -110,7 +110,12 @@ public class Barcode implements Comparable<Barcode>{
 	    } 
 	    int oneNumInt = Integer.parseInt(oneNumString);
 	    ans += bars[oneNumInt];
-	}    	    	 
+	}
+
+	//Adding in the checkDigit
+	int checkDigit = checkSum(zip);
+	ans += bars[checkDigit];
+	
 	ans += "|";
 	return ans;
     }
