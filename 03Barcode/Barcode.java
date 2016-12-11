@@ -11,15 +11,15 @@ public class Barcode implements Comparable<Barcode>{
     //                or zip contains a non digit
     //                _zip and _checkDigit are initialized.
     public Barcode(String zip){
+	if(zip.length() != 5){
+	    throw new IllegalArgumentException("zip is not the correct length");
+	}
+	
 	try{
 	    Integer.parseInt(zip);
 	}
 	catch(NumberFormatException e){
 	    throw new IllegalArgumentException("zip contains a non digit"); 
-	}
-
-	if(zip.length() != 5){
-	    throw new IllegalArgumentException("zip is not the correct length");
 	}
 
 	_zip = zip;
@@ -52,14 +52,14 @@ public class Barcode implements Comparable<Barcode>{
     public static String toZip(String code){
 	//basic checks and exception cases
 	if(code.length() != 32){
-	    throw new IllegalArgumentException("given barcode had incorrect length");
+	    throw new IllegalArgumentException("given barcode is not correct length");
 	}
 	if(code.charAt(0) != '|' || code.charAt(31) != '|'){
 	    throw new IllegalArgumentException("given barcode has invalid guard rails");
 	}
 	for(int i = 0; i < code.length(); i++){
 	    if(code.charAt(i) != ':' && code.charAt(i) != '|'){
-		throw new IllegalArgumentException("given barcode has invalid characters");
+		throw new IllegalArgumentException("given barcode has invalid characters (not all '|'s and ':'s)");
 	    }
 	}
 	
@@ -70,22 +70,23 @@ public class Barcode implements Comparable<Barcode>{
 	for(int i = 0; i < code.length() - 5; i += 5){
 	    String oneNum = code.substring(i, i + 5);
 	    if(aryIndexOf(oneNum, bars) == -1){
-		throw new IllegalArgumentException("given barcode contains a pattern mismatch (set of five :'s or |'s that does NOT match the code of a number)");
+		throw new IllegalArgumentException("given barcode contains a pattern mismatch (an encoded int is invalid)");
 	    }
 	    ans += aryIndexOf(oneNum, bars);
 	}
 
 	//last check to see if the checkdigit is correct
+	//NOTE, separated into two different checks... both throw same exception
 	//first, convert the checksum to a character
 	String checkDigitString = code.substring(25);
 	if(aryIndexOf(checkDigitString, bars) == -1){
-	    throw new IllegalArgumentException("given barcode contains a pattern mismatch (set of five :'s or |'s that does NOT match the code of a number)");
+	    throw new IllegalArgumentException("given barcode contains invalid checkDigit");
 	}
 	int checkDigitInt = aryIndexOf(checkDigitString, bars);
 
 	//now, check if equal...
 	if(checkSum(ans) != checkDigitInt){
-	    throw new IllegalArgumentException("checkSum fails on given barcode");
+	    throw new IllegalArgumentException("given barcode contains invalid checkDigit");
 	}					       
 	   
 	return ans;	
@@ -95,19 +96,19 @@ public class Barcode implements Comparable<Barcode>{
     public static String toCode(String zip){
        	//EXCEPTIONS:
 	if(zip.length() != 5){
-	    throw new IllegalArgumentException("given zip has incorrect length");
+	    throw new IllegalArgumentException("given zip is not correct length");
 	}
-
+	
+	try{
+	    Integer.parseInt(zip);
+	}
+	catch(NumberFormatException e){
+	    throw new IllegalArgumentException("given zip contains a non digit");
+	}
+	
 	String ans = "|";
-
-	//String[] helps in lower part's exception check
-	String[] stringNums = {"0","1","2","3","4","5","6","7","8","9"};
-
 	for(int i = 0; i < 5; i++){
 	    String oneNumString = zip.substring(i, i + 1);
-	    if(aryIndexOf(oneNumString, stringNums) == -1){ 
-		throw new IllegalArgumentException("given zip has incorrect characters"); //exception check for non-number characters in given zip
-	    } 
 	    int oneNumInt = Integer.parseInt(oneNumString);
 	    ans += bars[oneNumInt];
 	}
@@ -131,7 +132,7 @@ public class Barcode implements Comparable<Barcode>{
     // postcondition: compares the zip + checkdigit, in numerical order. 
     public int compareTo(Barcode other){
 	String thisZipPlus = _zip + checkSum(_zip) ;
-	String otherZipPlus = other._zip + other.checkSum(other._zip);
+	String otherZipPlus = other._zip + checkSum(other._zip);
 	
 	return thisZipPlus.compareTo(otherZipPlus);
     }    
