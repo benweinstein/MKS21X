@@ -4,6 +4,6 @@ public class Driver{
 	Sorts.selectionSort(data);
 	for(int i = 0; i < data.length; i++){
 	    System.out.println(data[i]);
-	}
+	} //works!!!
     }
 }
