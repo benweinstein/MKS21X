@@ -28,21 +28,14 @@ public class Sorts{
      *@param data  the elements to be sorted.
      */
     public static void insertionSort(int[] data){
-	for(int i = 1; i < data.length; i++){
-	    if(data[i] < data[i - 1]){
-		int toBeSwitched = data[i]; 
-		int indexToStop = i - 1;
-		for(int j = i - 1; j >= 0; j--){
-		    if(toBeSwitched < data[j]){
-			indexToStop = j; 
-		    }		    
-		}
-		data[indexToStop] = toBeSwitched;
-		for(int index = data.length - 1; index > indexToStop; index--){
-		    data[index] = data[index - 1];
-		}
-		i--;
+	for(int index = 1; index < data.length; index++){
+	    int dataAtIndex = data[index];
+	    int backwards = index;
+	    while(backwards > 0 && dataAtIndex < data[backwards - 1]){
+		    data[backwards] = data[backwards - 1];
+		    backwards--;
 	    }
-	}
+	    data[backwards] = dataAtIndex;
+	}	
     }
 }
