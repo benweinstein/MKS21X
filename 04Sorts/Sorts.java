@@ -38,4 +38,25 @@ public class Sorts{
 	    data[backwards] = dataAtIndex;
 	}	
     }
+
+    /**Bubble sort of an int array.
+     *Upon completion, the elements of the array will be in increasing order.
+     *@param data  the elements to be sorted.
+     */
+    public static void bubbleSort(int[] data){
+	for(int index = 0; index < data.length - index; index++){
+	    int swapCounter = 0;
+	    int toBeSwitched = data[index];
+	    for(int j = index; j + 1 < data.length - index; j++){
+		if(data[j] > data[j + 1]){
+		    data[j] = data[j + 1];
+		    data[j + 1] = toBeSwitched;
+		    swapCounter++;
+		}
+	    }
+	    if(swapCounter == 0){
+		return;
+	    }
+	}
+    }
 }
