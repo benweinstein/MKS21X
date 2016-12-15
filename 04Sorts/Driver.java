@@ -15,7 +15,7 @@ public class Driver{
 	}
 	*/
 	System.out.println("\nBUBBLE SORT");
-	int[] data2 = {3,2,5,6,2,1,9};
+	int[] data2 = {5,4,3,2,1};
 	Sorts.bubbleSort(data2);
 	for(int i = 0; i < data2.length; i++){
 	    System.out.println(data2[i]);

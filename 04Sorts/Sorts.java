@@ -44,11 +44,11 @@ public class Sorts{
      *@param data  the elements to be sorted.
      */
     public static void bubbleSort(int[] data){
-	for(int index = 0; index < data.length - index; index++){
-	    int swapCounter = 0;
-	    int toBeSwitched = data[index];
-	    for(int j = index; j + 1 < data.length - index; j++){
-		if(data[j] > data[j + 1]){
+	for(int index = 0; index < data.length; index++){
+	    int swapCounter = 0;	    
+	    for(int j = 0; j + 1 < data.length - index; j++){
+		int toBeSwitched = data[j];				       
+		if(toBeSwitched > data[j + 1]){
 		    data[j] = data[j + 1];
 		    data[j + 1] = toBeSwitched;
 		    swapCounter++;
