@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Window extends JFrame{
+public class Window extends JFrame implements ActionListener{
     
     private Container pane;
     private JButton toF; 
@@ -23,13 +24,42 @@ public class Window extends JFrame{
 	inputTemp = new JTextField(5);
 	outputTemp = new JTextField(5);
 
+	toF.addActionListener(this);
+	toF.setActionCommand("toF");
+	toC.addActionListener(this);
+	toC.setActionCommand("toC");
+
+	inputTemp.setText("Input");
+	outputTemp.setText("Output");
+	
+	pane.add(inputTemp);
 	pane.add(toF);
 	pane.add(toC);
-	pane.add(inputTemp);
 	pane.add(outputTemp);
     }
 
-
+    //implementing ActionListener interface
+    public void actionPerformed(ActionEvent e){
+	String cmd = e.getActionCommand();
+	double temp;
+	if(cmd.equals("toF")){
+	    try{
+		temp = Double.parseDouble(inputTemp.getText());
+		outputTemp.setText("" + convertTemp.CtoF(temp));
+	    }catch(NumberFormatException error){//'e' being used as the param
+		System.out.println("Enter a valid number for input");
+	    }	    
+	}
+	if(cmd.equals("toC")){
+	    try{
+	        temp = Double.parseDouble(inputTemp.getText());
+		outputTemp.setText("" + convertTemp.FtoC(temp));
+	    }catch(NumberFormatException error){
+		System.out.println("Enter a valid number for input");
+	    }
+	}
+    }
+    
     //MAIN JUST INSTANTIATES AND MAKES VISIBLE
     public static void main(String[] args){
 	Window g = new Window();
